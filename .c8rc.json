@@ -1,0 +1,24 @@
+{
+  "checkCoverage": true,
+  "statements": 99.89,
+  "branches": 98.44,
+  "functions": 100,
+  "lines": 99.89,
+  "exclude": [
+    "bin",
+    "configs",
+    "doc",
+    "docs",
+    "coverage",
+    "test",
+    "tools",
+    "tmp*",
+    ".mocharc.cjs",
+    ".eslintrc.cjs",
+    "src/cli/tools/svg-in-html-snippets/script.snippet.cjs",
+    "src/cli/init-config/get-user-input.mjs",
+    "src/cli/listeners/*/index.mjs",
+    "src/cli/listeners/{cli-feedback,ndjson}.mjs"
+  ],
+  "reporter": ["text-summary", "html", "json-summary"]
+}
