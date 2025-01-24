@@ -11,6 +11,7 @@ import livescriptWrap from "./livescript-wrap.mjs";
 import svelteWrapFunction from "./svelte-wrap.mjs";
 import typescriptWrapFunction from "./typescript-wrap.mjs";
 import vueTemplateWrap from "./vue-template-wrap.cjs";
+import mdxWrapFunction from "./mdx-wrap.mjs";
 import meta from "#meta.cjs";
 
 const swcWrap = {
@@ -20,6 +21,7 @@ const swcWrap = {
 const coffeeScriptWrap = coffeeScriptWrapFunction(false);
 const svelteWrap = svelteWrapFunction(javascriptWrap);
 const typescriptWrap = typescriptWrapFunction("esm");
+const mdxWrap = mdxWrapFunction();
 
 function gotCoffee() {
   return (
@@ -45,6 +47,10 @@ const TRANSPILER2AVAILABLE = {
     "@vue/compiler-sfc",
     meta.supportedTranspilers["@vue/compiler-sfc"],
   ),
+  "@mdx-js/mdx": tryAvailable(
+    "@mdx-js/mdx",
+    meta.supportedTranspilers["@mdx-js/mdx"],
+  ),
 };
 
 const TRANSPILER2WRAPPER = {
@@ -58,6 +64,7 @@ const TRANSPILER2WRAPPER = {
   typescript: typescriptWrap,
   "vue-template-compiler": vueTemplateWrap,
   "@vue/compiler-sfc": vueTemplateWrap,
+  "@mdx-js/mdx": mdxWrap,
 };
 
 export const EXTENSION2AVAILABLE = new Map([
@@ -84,6 +91,7 @@ export const EXTENSION2AVAILABLE = new Map([
   [".coffee.md", gotCoffee()],
   [".csx", gotCoffee()],
   [".cjsx", gotCoffee()],
+  [".mdx", TRANSPILER2AVAILABLE["@mdx-js/mdx"]],
 ]);
 
 const EXTENSIONS_PER_PARSER = {
